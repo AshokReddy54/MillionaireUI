@@ -1,0 +1,44 @@
+<div class="wrapper  mt-4" >
+    <form [formGroup]="addQuestion" (ngSubmit)="add()">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Q</span>
+            <input type="text" class="form-control" [ngClass]="{'isRequired':isRequired && !addQuestion.get('question').value}" placeholder="Question" formControlName="question" >
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">1</span>
+            </div>
+            <input type="text" class="form-control" [ngClass]="{'isRequired':isRequired && !addQuestion.get('option1').value}" placeholder="Option 1" formControlName="option1" aria-label="Username" >
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"  id="basic-addon2">2</span>
+            </div>
+            <input type="text" class="form-control" [ngClass]="{'isRequired':isRequired && !addQuestion.get('option2').value}" placeholder="Option2"  formControlName="option2" >
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">3</span>
+            </div>
+            <input type="text" class="form-control" [ngClass]="{'isRequired':isRequired && !addQuestion.get('option3').value}" placeholder="Option3" formControlName="option3">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon4">4</span>
+            </div>
+            <input type="text" class="form-control" [ngClass]="{'isRequired':isRequired && !addQuestion.get('option4').value}" placeholder="Option4" formControlName="option4">
+        </div>
+        <div class="form-group col1" >
+            <span style="font-size: large;">Answer  </span>
+            <select formControlName="answer" [ngClass]="{'isRequired':isRequired && !addQuestion.get('answer').value}">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success ">Add Question</button>
+
+    </form>
+</div>

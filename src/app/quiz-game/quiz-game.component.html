@@ -1,0 +1,83 @@
+<div class="image">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="circle mt-4 ">
+                <h1 style="margin: 68px;color: white;">{{timer}}</h1>
+            </div>
+            <div class="container " style="margin-top: 80px;margin-left: 10px;">
+                <div class="row">
+                    <div class="quesntion">
+                        <h1 class="text-light ml-3">Q) {{question}}</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mt-1  option" *ngFor="let opt of options,index as i">
+                        <div (click)="getAnswer(opt,id,'selected')" >
+                            <h4 class="text-light m-1">{{i+1}}. {{opt}}</h4> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div style="display: inline;" class="">
+                <button  class="mt-1 mb-2 btn btn-primary btn-circle btn-lg " [ngClass]="{disabled:isFifty}" (click)="fiftyFifty()"style="border-radius: 50%" >50-50</button>
+                <button class="btn btn-primary btn-circle btn-lg ml-1 mt-1 mb-2 " [ngClass]="{disabled:isCall}" data-toggle="modal" data-target="#exampleModalLong" (click)="callAFriend()" style="border-radius: 50%"><i class="fa fa-phone" aria-hidden="true"></i></button>
+                <button class="btn btn-primary btn-circle btn-lg ml-1 mt-1 mb-2  " [ngClass]="{disabled:isPoll}" data-toggle="modal" data-target="#exampleModal" type="submit" (click)="poll()"  style="border-radius: 50%"><i class="fa fa-users" aria-hidden="true"></i></button>
+
+            </div>
+            <div class="level-box ">
+                <div class=" ml-2 " *ngFor="let money of amount,index as i">
+                    <div class="money" [ngClass]="cash<i ? 'text-warning':'text-light'" [ngStyle]="{'background-color':i===cash ? '#ecc904' : ''}">
+                        {{money | currency:'INR'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Poll -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">User Poll</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="progress mt-1" *ngFor="let opt of options,index as i">
+                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"  [ngStyle]="{'width': opt===answer ? '70%':'10%'}">Option{{i+1}}</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Call a Friend -->
+<div class="modal fade mt-2" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+              {{message}}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<button style="display: none;" #dummy></button>

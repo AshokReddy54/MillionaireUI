@@ -1,0 +1,18 @@
+  <div class="modal-dialog newGame">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>NEW GAME</h2>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="angForm"  novalidate>
+                <div class="form-group">
+                    <h3>Enter Name</h3>
+                    <input class="form-control" placeholder="Enter Name *" [ngClass]="{isInvalid: isRequired}" formControlName="name" (keyup)="onKey($event)">
+                </div>               
+                <button (click)="start()"   class="btn btn-primary mb-1">Start</button>
+          </form>
+        </div>
+
+    </div>
+</div>
+ 

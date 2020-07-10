@@ -1,0 +1,21 @@
+<div class="wrapper mt-3">
+    <div class="row" style="border-bottom: 1px solid black;">
+        <div class="col">
+        <h3> Player Name</h3> 
+        </div>
+        <div class="col">
+            <h3> Points</h3> 
+        </div>
+      </div>
+      <div class="row mt-1" *ngFor='let player of players'>
+        <div class="col">
+            <h5 style="text-transform: capitalize;">{{player.name}}</h5> 
+           
+        </div>
+        <div class="col">
+            <h5> {{player.points}}</h5> 
+            
+        </div>
+      </div>
+    
+</div>
