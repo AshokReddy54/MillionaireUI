@@ -1,14 +1,13 @@
 .image {
-    min-height: 104vh;
+    min-height: 100vh;
     width: 100%;
-    background-image: url('../../assets/pexels-photo-220118.jpeg');
+    background-image: url('../../assets/milliionaire.jpg');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
     background-color: darkblue
 }
-
 .quesntion {
     margin: auto;
     border: 3px solid rgb(167, 111, 111);
@@ -17,7 +16,20 @@
     box-shadow: 0px 0px 13px 2px rgb(0, 0, 0);
     width: 100%;
 }
-
+.timer{
+    margin: 68px;
+    color: white;
+}
+.life{
+    display: inline;
+}
+.life button{
+    border-radius: 50%;
+}
+.dashboard{
+    position: absolute;
+    bottom: 0;
+}
 .option {
     margin: auto;
     border: 2px solid rgb(167, 111, 111);
@@ -42,7 +54,9 @@
     background-color: black;
     font-size: 16px;
     font-weight: 700;
-    margin: auto;
+    // margin: auto;
+    position: absolute;
+    right:31%;
 }
 
 .level-box {
@@ -66,3 +80,20 @@
     cursor: not-allowed;
     opacity: 0.5;
 }
+.progress-bar-vertical {
+    width: 20px;
+    min-height: 300px;
+    display: flex;
+    align-items: flex-end;
+    margin-left: 50px;
+    float: left;
+  }
+  
+  .progress-bar-vertical .progress-bar {
+    width: 100%;
+    height: 0;
+    -webkit-transition: height 0.6s ease;
+    -o-transition: height 0.6s ease;
+    transition: height 0.6s ease;
+  }
+  

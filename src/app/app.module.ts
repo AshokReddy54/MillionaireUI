@@ -12,7 +12,8 @@ import { WinComponent } from './win/win.component';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PlayersListComponent } from './players-list/players-list.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { PlayersListComponent } from './players-list/players-list.component';
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [CurrencyPipe],
   bootstrap: [AppComponent]

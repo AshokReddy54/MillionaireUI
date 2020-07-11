@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from '../app.service';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
     selector: 'app-add-question',
     templateUrl: './add-question.component.html',
@@ -9,11 +11,12 @@ import { AppService } from '../app.service';
 export class AddQuestionComponent implements OnInit {
     addQuestion: FormGroup;
     isRequired: boolean;
-    constructor(private fb: FormBuilder, private appService: AppService) { }
+    isLoading: boolean;
+    constructor(private fb: FormBuilder, private appService: AppService, private toaster: ToastrService) { }
     ngOnInit(): void {
         this.createForm();
     }
-
+//to create Add question Form
     createForm() {
         this.addQuestion = this.fb.group({
             question: ['', Validators.required],
@@ -22,8 +25,9 @@ export class AddQuestionComponent implements OnInit {
             option3: ['', Validators.required],
             option4: ['', Validators.required],
             answer: [null, Validators.required]
-        })
+        });
     }
+    //to check Form validation
     checkValidation() {
         if (this.addQuestion.get('question').hasError('required')) {
             this.isRequired = true;
@@ -44,12 +48,14 @@ export class AddQuestionComponent implements OnInit {
             this.isRequired = true;
         }
     }
+    //to add a new question
     add() {
         this.isRequired = false;
         this.checkValidation();
         if (this.isRequired) {
             return;
         }
+        this.isLoading = true;
         const options = [];
         // tslint:disable-next-line: max-line-length
         options.push(this.addQuestion.get('option1').value,
@@ -59,13 +65,15 @@ export class AddQuestionComponent implements OnInit {
         const data = {
             name: this.addQuestion.get('question').value,
             options: options.toString(),
-            answer: options[this.addQuestion.get('answer').value]
+            answer: options[this.addQuestion.get('answer').value - 1]
         };
         this.appService.addQuestion(data).subscribe((res: any) => {
-             this.addQuestion.reset();
+            this.addQuestion.reset();
+            this.isLoading = false;
+            this.toaster.success('Added Question Successfully!', 'Success');
         }, error => {
-            console.log(error);
-          });
+            this.toaster.error('Something Went Wrong!' , 'Error');
+        });
 
     }
 

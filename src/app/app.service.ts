@@ -1,30 +1,23 @@
+// Author:- Sesha Sai
+// File:-app.service.ts
+// Purpose:-integrating Backend API's
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
-import { throwError, Observable, BehaviorSubject } from 'rxjs';
-import Swal from 'sweetalert2';
+import { throwError, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
+
 export class AppService {
-    url = 'http://localhost:3000';
-    name:string;
-    prize:number;
+    url = environment.apiURL;
+    name: string;
+    prize: number;
     constructor(private http: HttpClient, private router: Router) { }
-
-    public showAlert(title, text, icon) {
-        Swal.fire({
-            title,
-            text,
-            icon,
-            confirmButtonText: 'Ok'
-        }).then((result) => {
-            this.router.navigate(['/']);
-        });
-
-    }
-    getQuestions(): Observable<any> {
+//to get all questions
+     getQuestions(): Observable<any> {
         const url = `${this.url}/questions`;
         return this.http.get(url)
             .pipe(
@@ -34,6 +27,7 @@ export class AppService {
                 catchError((error: Response) => throwError(error))
             );
     }
+    //to add a new question
     addQuestion(body) {
         const url = `${this.url}/questions/create`;
         const headers = new Headers();
@@ -46,7 +40,8 @@ export class AppService {
             catchError((error: Response) => throwError(error))
         );
     }
-    getAnswer(params){
+    //to get specified answer
+    getAnswer(params) {
         const url = `${this.url}/questions/${params}`;
         return this.http.get(url)
             .pipe(
@@ -56,7 +51,8 @@ export class AppService {
                 catchError((error: Response) => throwError(error))
             );
     }
-    postPlayer(data){
+    // to create a player with points
+    postPlayer(data) {
         const url = `${this.url}/players/create`;
         return this.http.post(url, data).pipe(
             map((res: Response) => {
@@ -66,14 +62,15 @@ export class AppService {
         );
 
     }
-    getPlayers(){
+    // to get players
+    getPlayers() {
         const url = `${this.url}/players`;
         return this.http.get(url)
-        .pipe(
-            map((res: Response) => {
-                return res;
-            }),
-            catchError((error: Response) => throwError(error))
-        );
+            .pipe(
+                map((res: Response) => {
+                    return res;
+                }),
+                catchError((error: Response) => throwError(error))
+            );
     }
 }

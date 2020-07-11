@@ -10,27 +10,26 @@ import { AppService } from '../app.service';
 })
 export class StartComponent implements OnInit {
 
-    angForm: FormGroup;
+    playerForm: FormGroup;
     isRequired: boolean;
-    constructor(private fb: FormBuilder, private router: Router, private appService: AppService) {
-        this.createForm();
-    }
+    constructor(private fb: FormBuilder, private router: Router, private appService: AppService) { }
+
+    //creating player form control
     createForm() {
-        this.angForm = this.fb.group({
+        this.playerForm = this.fb.group({
             name: ['', Validators.required],
 
         });
     }
 
     ngOnInit(): void {
-    }
-    onKey = ($event) => {
-        this.isRequired = false;
+        this.createForm();
     }
 
+    //checking name feild and redirects to Quiz
     start() {
-        if (this.angForm.controls['name'].value) {
-            this.appService.name = this.angForm.controls['name'].value;
+        if (this.playerForm.controls['name'].value) {
+            this.appService.name = this.playerForm.controls['name'].value;
             this.router.navigate(['quiz']);
         }
         else {

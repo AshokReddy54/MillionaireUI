@@ -1,9 +1,13 @@
+// Author:- Sesha Sai
+// File:-quiz-game
+// Purpose:-The logic of Quiz Component
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
-import { Observable, Subscription, Subject, timer } from 'rxjs';
+import { Subscription, Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AppService } from '../app.service';
+import { Utils } from '../utill';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-quiz-game',
@@ -12,8 +16,7 @@ import { AppService } from '../app.service';
 })
 export class QuizGameComponent implements OnInit {
     optional: boolean;
-    data: any[]
-        ;
+    data: any[];
     amount = [10000000, 1000000, 100000, 10000, 9000, 8000, 7000, 6000, 5000, 4000, 3000, 2000, 1000, 500, 100];
     question: string;
     options: any[];
@@ -21,7 +24,7 @@ export class QuizGameComponent implements OnInit {
     isFifty: boolean;
     @ViewChild('dummy') el: ElementRef;
     destroy = new Subject();
-    timer: number;
+    timer: number = 30;
     rxjsTimer = timer(1000, 1000);
     cash: number;
     message: string;
@@ -31,7 +34,7 @@ export class QuizGameComponent implements OnInit {
     isCall: boolean;
     isPoll: boolean;
 
-    constructor(private router: Router, private currencyPipe: CurrencyPipe, private appService: AppService) { }
+    constructor(private router: Router, private appService: AppService, private toaster: ToastrService) { }
 
     ngOnInit() {
         this.isFifty = false;
@@ -39,40 +42,42 @@ export class QuizGameComponent implements OnInit {
             this.data = res.allquestions;
             this.start();
         }, error => {
-            console.log(error);
+            this.toaster.error('Something Went Wrong!', 'Error');
         });
 
         this.level = 0;
         this.cash = this.amount.length - 1;
 
     }
+    //to get random 15 qsns and display question and options 
     start() {
-        if (this.data.length !== 4) {
+        if (this.data.length !== 15) {
             this.data = this.data.sort(() => Math.random() - Math.random()).slice(0, 15);
         }
         this.question = this.data[this.level].name;
         this.options = this.data[this.level].options.split(',');
         this.id = this.data[this.level].id;
+        this.timer = 30;
         this.timerLap();
 
     }
-
 
     ngOnDestroy() {
         this.destroy.unsubscribe();
         this.questionSubscription.unsubscribe();
     }
+    //for timer
     timerLap() {
-        this.timer = 30;
         this.rxjsTimer.pipe(takeUntil(this.destroy)).subscribe(val => {
             this.timer = --this.timer;
-            if (this.timer === 0) {
-                this.destroy.next(false);
-                this.destroy.complete();
-                this.appService.showAlert('Sorry!', 'You Have Lost the game', 'error');
-            }
+            // if (this.timer === 0) {
+            //     this.destroy.next(false);
+            //     this.destroy.complete();
+            //     Utils.showAlert('Sorry!', 'You Have Lost the game', 'error', this.router);
+            // }
         });
     }
+    //to get correct answer to question and declaring win/loose
     getAnswer(option, id, mode) {
         this.appService.getAnswer(id).subscribe((res: any) => {
             this.answer = res.answer;
@@ -91,7 +96,6 @@ export class QuizGameComponent implements OnInit {
 
                 }
             } else {
-                this.message = `Your Friend Answer is ${this.answer}`;
                 if (mode === 'fifty') {
                     const dummy = this.options.filter(d => (d !== this.answer));
                     const fiftyelement = dummy[Math.floor(Math.random() * dummy.length)];
@@ -100,29 +104,40 @@ export class QuizGameComponent implements OnInit {
 
             }
         }, error => {
-            console.log(error);
+            this.toaster.error('Something Went Wrong!', 'Error');
         });
     }
+    //for 50-50
     fiftyFifty() {
         this.isFifty = true;
         this.getAnswer('', this.id, 'fifty');
+        this.destroy.next(false)
     }
+    //for call a friend
     callAFriend() {
         this.isCall = true;
         this.getAnswer('', this.id, 'call');
+        this.destroy.next(false)
     }
+    //for poll
     poll() {
         this.isPoll = true;
         this.getAnswer('', this.id, 'poll');
+        this.destroy.next(false);
     }
+    close() {
+        this.timerLap();
+    }
+    //to post player information if he loose with gained points
     player() {
-        const points = this.amount.sort();
+        var points = [...this.amount];
+        points = points.sort();
         const data = {
             name: this.appService.name,
-            points: points[this.level]
+            points: points[this.level - 1]
         }
         this.appService.postPlayer(data).subscribe((res: any) => {
-            this.appService.showAlert('Sorry!', 'You Have Lost the game', 'error');
+            Utils.showAlert('Sorry!', 'You Have Lost the game', 'error', this.router);
 
         }, error => {
             console.log(error);
