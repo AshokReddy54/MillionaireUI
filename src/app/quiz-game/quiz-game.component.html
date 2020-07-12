@@ -24,17 +24,15 @@
         </div>
         <div class="col-md-2">
             <div class="life">
-                <!-- <div><i class="fa fa-times lifeCross" aria-hidden="true"></i>
-                </div> -->
-                <button class="mt-1 mb-2 btn btn-primary btn-circle btn-lg " [ngClass]="{disabled:isFifty}" (click)="fiftyFifty()">50-50</button>
-                <!-- <div><i class="fa fa-times lifeCross" aria-hidden="true"></i>
-                </div> -->
-
-                <button class="btn btn-primary btn-circle btn-lg ml-1 mt-1 mb-2 " [ngClass]="{disabled:isCall}" data-toggle="modal" data-target="#exampleModalLong" (click)="callAFriend()"><i class="fa fa-phone" aria-hidden="true"></i></button>
-                <!-- <div><i class="fa fa-times lifeCross" aria-hidden="true"></i>
-                </div> -->
-
-                <button class="btn btn-primary btn-circle btn-lg ml-1 mt-1 mb-2  " [ngClass]="{disabled:isPoll}" data-toggle="modal" data-target="#exampleModal" type="submit" (click)="poll()"><i class="fa fa-users" aria-hidden="true"></i></button>
+                <button class="mt-1 mb-2 btn btn-primary btn-circle btn-lg " [ngClass]="{disabled:isFifty}" (click)="fiftyFifty()">
+                    <i *ngIf="isFifty" class="fa fa-times lifeCross" aria-hidden="true"></i>
+                    50-50</button>
+                <button class="btn btn-primary btn-circle btn-lg  mt-1 mb-2 " [ngClass]="{disabled:isCall}" data-toggle="modal" data-target="#exampleModalLong" (click)="callAFriend()">
+                    <i *ngIf="isCall" class="fa fa-times lifeCross" aria-hidden="true"></i>
+                    <i class="fa fa-phone" aria-hidden="true"></i></button>
+                <button class="btn btn-primary btn-circle btn-lg  mt-1 mb-2  " [ngClass]="{disabled:isPoll}" data-toggle="modal" data-target="#exampleModal" type="submit" (click)="poll()">
+                    <i *ngIf="isPoll" class="fa fa-times lifeCross" aria-hidden="true"></i>
+                    <i class="fa fa-users" aria-hidden="true"></i></button>
 
             </div>
             <div class="level-box ">
@@ -63,8 +61,9 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body justify-content-center">
-                        <div class="progress progress-bar-vertical mt-1 ml-4" *ngFor="let opt of options,index as i">
+                        <div class="progress progress-bar-vertical " *ngFor="let opt of options,index as i">
                             <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'height': opt===answer ? '70%':'10%'}"></div>
+                        <h5 class="progressOption">{{i}}</h5>
                         </div>
 
                     </div>

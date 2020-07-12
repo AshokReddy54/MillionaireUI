@@ -72,6 +72,7 @@ export class QuizGameComponent implements OnInit {
             if (this.timer === 0) {
                 this.destroy.next(false);
                 this.destroy.complete();
+                this.player();
                 Utils.showAlert('Sorry!', 'You Have Lost the game', 'error', this.router);
             }
         });
@@ -110,7 +111,6 @@ export class QuizGameComponent implements OnInit {
     fiftyFifty() {
         this.isFifty = true;
         this.getAnswer('', this.id, 'fifty');
-        this.destroy.next(false)
     }
     //for call a friend
     callAFriend() {
@@ -139,7 +139,7 @@ export class QuizGameComponent implements OnInit {
             Utils.showAlert('Sorry!', 'You Have Lost the game', 'error', this.router);
 
         }, error => {
-            console.log(error);
+            this.toaster.error("something went wrong!","Error")
         });
     }
 
