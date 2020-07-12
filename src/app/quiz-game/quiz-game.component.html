@@ -1,3 +1,6 @@
+<!-- // Author:- Sesha Sai
+// File:-quiz-game.html
+// Purpose:-The view of Quiz Component -->
 <div class="image">
     <div class="row">
         <div class="col-md-10">
@@ -21,9 +24,16 @@
         </div>
         <div class="col-md-2">
             <div class="life">
-                
+                <!-- <div><i class="fa fa-times lifeCross" aria-hidden="true"></i>
+                </div> -->
                 <button class="mt-1 mb-2 btn btn-primary btn-circle btn-lg " [ngClass]="{disabled:isFifty}" (click)="fiftyFifty()">50-50</button>
+                <!-- <div><i class="fa fa-times lifeCross" aria-hidden="true"></i>
+                </div> -->
+
                 <button class="btn btn-primary btn-circle btn-lg ml-1 mt-1 mb-2 " [ngClass]="{disabled:isCall}" data-toggle="modal" data-target="#exampleModalLong" (click)="callAFriend()"><i class="fa fa-phone" aria-hidden="true"></i></button>
+                <!-- <div><i class="fa fa-times lifeCross" aria-hidden="true"></i>
+                </div> -->
+
                 <button class="btn btn-primary btn-circle btn-lg ml-1 mt-1 mb-2  " [ngClass]="{disabled:isPoll}" data-toggle="modal" data-target="#exampleModal" type="submit" (click)="poll()"><i class="fa fa-users" aria-hidden="true"></i></button>
 
             </div>
@@ -87,5 +97,3 @@
         </div>
     </div>
 </div>
-
-<button style="display: none;" #dummy data-dismiss="modal"></button>

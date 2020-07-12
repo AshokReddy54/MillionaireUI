@@ -1,5 +1,5 @@
 // Author:- Sesha Sai
-// File:-quiz-game
+// File:-quiz-game.ts
 // Purpose:-The logic of Quiz Component
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';

@@ -1,3 +1,6 @@
+// Author:- Sesha Sai
+// File:-add-question.ts
+// Purpose:-The logic of add-question Component
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from '../app.service';

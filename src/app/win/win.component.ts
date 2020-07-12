@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+// Author:- Sesha Sai
+// File:- win.ts
+// Purpose:-The logic of win Component
 import { AppService } from '../app.service';
 import { Utils } from '../utill';
 import { Router } from '@angular/router';

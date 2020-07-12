@@ -1,3 +1,6 @@
+// Author:- Sesha Sai
+// File:- start.ts
+// Purpose:-The logic of start Component
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';

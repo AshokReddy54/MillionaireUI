@@ -1,3 +1,6 @@
+// Author:- Sesha Sai
+// File:-players-list.ts
+// Purpose:-The logic of players-list Component
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { ToastrService } from 'ngx-toastr';
