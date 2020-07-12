@@ -1,7 +1,7 @@
 // Author:- Sesha Sai
 // File:-quiz-game
 // Purpose:-The logic of Quiz Component
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -22,7 +22,6 @@ export class QuizGameComponent implements OnInit {
     options: any[];
     level: number;
     isFifty: boolean;
-    @ViewChild('dummy') el: ElementRef;
     destroy = new Subject();
     timer: number = 30;
     rxjsTimer = timer(1000, 1000);
@@ -70,11 +69,11 @@ export class QuizGameComponent implements OnInit {
     timerLap() {
         this.rxjsTimer.pipe(takeUntil(this.destroy)).subscribe(val => {
             this.timer = --this.timer;
-            // if (this.timer === 0) {
-            //     this.destroy.next(false);
-            //     this.destroy.complete();
-            //     Utils.showAlert('Sorry!', 'You Have Lost the game', 'error', this.router);
-            // }
+            if (this.timer === 0) {
+                this.destroy.next(false);
+                this.destroy.complete();
+                Utils.showAlert('Sorry!', 'You Have Lost the game', 'error', this.router);
+            }
         });
     }
     //to get correct answer to question and declaring win/loose
