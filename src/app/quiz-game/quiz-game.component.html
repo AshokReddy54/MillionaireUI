@@ -25,13 +25,13 @@
         <div class="col-md-2">
             <div class="life">
                 <button class="mt-1 mb-2 btn btn-primary btn-circle btn-lg " [ngClass]="{disabled:isFifty}" (click)="fiftyFifty()">
-                    <i *ngIf="isFifty" class="fa fa-times lifeCross" aria-hidden="true"></i>
+                    <i *ngIf="isFifty" class="fa fa-times fa-3x lifeCross" [ngStyle]="{'margin-left' : isFifty ? '0px' : ''}" aria-hidden="true"></i>
                     50-50</button>
-                <button class="btn btn-primary btn-circle btn-lg  mt-1 mb-2 " [ngClass]="{disabled:isCall}" data-toggle="modal" data-target="#exampleModalLong" (click)="callAFriend()">
-                    <i *ngIf="isCall" class="fa fa-times lifeCross" aria-hidden="true"></i>
+                <button class="btn btn-primary btn-circle btn-lg  mt-1 ml-1 mb-2 " [ngClass]="{disabled:isCall}" data-toggle="modal" data-target="#exampleModalLong" (click)="callAFriend()">
+                    <i *ngIf="isCall" class="fa fa-times fa-3x lifeCross" aria-hidden="true"></i>
                     <i class="fa fa-phone" aria-hidden="true"></i></button>
-                <button class="btn btn-primary btn-circle btn-lg  mt-1 mb-2  " [ngClass]="{disabled:isPoll}" data-toggle="modal" data-target="#exampleModal" type="submit" (click)="poll()">
-                    <i *ngIf="isPoll" class="fa fa-times lifeCross" aria-hidden="true"></i>
+                <button class="btn btn-primary btn-circle btn-lg ml-1  mt-1 mb-2  " [ngClass]="{disabled:isPoll}" data-toggle="modal" data-target="#exampleModal" type="submit" (click)="poll()">
+                    <i *ngIf="isPoll" class="fa fa-times fa-3x lifeCross" aria-hidden="true"></i>
                     <i class="fa fa-users" aria-hidden="true"></i></button>
 
             </div>
@@ -53,7 +53,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">User Poll</h5>
+                <h5 class="modal-title headerTitle" id="exampleModalLabel">User Poll</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
             <span aria-hidden="true" >&times;</span>
           </button>
@@ -82,7 +82,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Call to a friend</h5>
+                <h5 class="modal-title headerTitle" id="exampleModalLongTitle">Call to a friend</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
             <span aria-hidden="true" >&times;</span>
           </button>

@@ -133,13 +133,13 @@ export class QuizGameComponent implements OnInit {
         points = points.sort();
         const data = {
             name: this.appService.name,
-            points: points[this.level - 1]
+            points: this.level === 0 ? 0 : points[this.level - 1]
         }
         this.appService.postPlayer(data).subscribe((res: any) => {
             Utils.showAlert('Sorry!', 'You Have Lost the game', 'error', this.router);
 
         }, error => {
-            this.toaster.error("something went wrong!","Error")
+            this.toaster.error("something went wrong!", "Error")
         });
     }
 

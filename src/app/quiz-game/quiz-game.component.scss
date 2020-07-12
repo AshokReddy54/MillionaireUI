@@ -48,11 +48,13 @@
 .lifeCross{
     color: red;
     position: absolute;
-    font-size: 45px;
-    margin-left: 9px;
-    top: 7px;
+    top: -3px;
+    margin-left: -15px;
 }
-
+.headerTitle{
+    width: 90%;
+    text-align: center;
+}
 .circle {
     width: 200px;
     height: 200px;
@@ -101,6 +103,7 @@
   .progressOption{
       position: absolute;
       margin-left: 4px;
+      color: white;
   }
   .progress-bar-vertical .progress-bar {
     width: 100%;
