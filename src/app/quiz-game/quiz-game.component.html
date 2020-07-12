@@ -63,7 +63,7 @@
                     <div class="card-body justify-content-center">
                         <div class="progress progress-bar-vertical " *ngFor="let opt of options,index as i">
                             <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'height': opt===answer ? '70%':'10%'}"></div>
-                        <h5 class="progressOption">{{i}}</h5>
+                        <h5 class="progressOption">{{i+1}}</h5>
                         </div>
 
                     </div>
