@@ -2,6 +2,7 @@
 // File:-add-question.html
 // Purpose:-The view of add-question Component -->
 <div class="wrapper  mt-4" *ngIf ="!isLoading">
+    <h2>ADD New Question</h2>
     <form [formGroup]="addQuestion" (ngSubmit)="add()">
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Q</span>

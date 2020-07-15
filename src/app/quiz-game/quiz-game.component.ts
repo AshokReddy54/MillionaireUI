@@ -130,7 +130,10 @@ export class QuizGameComponent implements OnInit {
     //to post player information if he loose with gained points
     player() {
         var points = [...this.amount];
-        points = points.sort();
+        points = points.sort((a, b)=>{
+            return a - b;
+        });;
+        console.log(points)
         const data = {
             name: this.appService.name,
             points: this.level === 0 ? 0 : points[this.level - 1]
